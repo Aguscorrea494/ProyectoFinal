@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block cambio%}
+</p>
+{% for Juegos in object_list %}
+<h3> VIDEOJUEGO </h3>
+<h5>{{Juegos.nombre}}</h5>
+<p> Plataforma: {{Juegos.subnombre}}</p>
+
+  <p class="lead mb-0">
+      </p>
+<p>
+{% endfor %}
+    {% endblock %}

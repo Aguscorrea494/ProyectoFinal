@@ -1,12 +1,12 @@
 from django import forms
+from datetime import datetime
+
 
 class BlogForm(forms.Form):
     nombre = forms.CharField()
-    subnombre = forms.CharField()
-    cuerpo = forms.CharField()
+    plataforma = forms.CharField()
+    descripcion = forms.CharField()
     autor = forms.CharField()
-    # fecha = forms.IntegerField()
-
     # imagen = forms.ImageField()
 
 

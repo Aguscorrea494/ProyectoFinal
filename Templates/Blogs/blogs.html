@@ -9,5 +9,10 @@
   <p class="lead mb-0">
       </p>
 <p>
+    <p>
+     <a href="{% url 'JuegoDetalle' Juegos.id %}">Detalles</a>
+    <a href="{% url 'JuegoEditar' Juegos.id %}">Editar</a>
+    <a href="{% url 'JuegoBorrar' Juegos.id %}">Borrar</a>
+</p>
 {% endfor %}
     {% endblock %}

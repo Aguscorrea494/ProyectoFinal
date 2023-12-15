@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block cambio%}
+
+<h3> {{object.nombre}} </h3>
+<p> PLATAFORMA : {{object.subnombre}} </p>
+<p> DESCRIPCION : {{object.cuerpo}}  </p>
+<p> AUTOR : {{object.autor}}  </p>
+<p> FECHA : {{object.fecha}}  </p>
+<p> {{object.imagen}} </p>
+<p>
+     <a href="{% url 'JuegoLista' %}">Volver a la lista</a>
+</p>
+
+    {% endblock %}

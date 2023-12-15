@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from Juegos.forms import BlogForm
 from Juegos.models import Juegos
@@ -21,7 +21,7 @@ def crear_juego_form(request):
         blog_formulario = BlogForm(request.POST)
         if blog_formulario.is_valid():
             informacion = blog_formulario.cleaned_data
-            juego_agregar = Juegos(nombre=informacion["nombre"], subnombre=informacion["subnombre"], cuerpo=informacion["cuerpo"], autor=["autor"],)
+            juego_agregar = Juegos(nombre=informacion["nombre"], subnombre=informacion["subnombre"], cuerpo=informacion["cuerpo"], autor=informacion["autor"], )
             juego_agregar.save()
             return redirect("/apps/list/")
 
@@ -30,8 +30,18 @@ def crear_juego_form(request):
         "form": form
     }
     return render(request, template_name="Blogs/formulario_crear.html", context=contexto)
-class JuegoCreate(CreateView):
-        model = Juegos
-        success_url = "/apps/list/"
-        template_name = ("Blogs/formulario_crear.html")
-        fields = ["nombre",]
+class JuegoDetalle(DetailView):
+    model =  Juegos
+    template_name = "Blogs/juego_detalle.html"
+
+class JuegoEditar(UpdateView):
+    model = Juegos
+    success_url = "/apps/list/"
+    template_name = ("Blogs/formulario_crear.html")
+    fields = ["nombre","subnombre","cuerpo"]
+
+class JuegoBorrar(DeleteView):
+    model = Juegos
+    success_url = "/apps/list/"
+    template_name = "Blogs/eliminar_juego.html"
+

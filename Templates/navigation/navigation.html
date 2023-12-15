@@ -4,6 +4,15 @@
                 <a class="navbar-brand" href="/apps/show/">GAMESBLOG</a>
                 <a class="btn btn-brand" href="/apps/crear/">Agregar Juego</a>
                 <a class="btn btn-brand" href="/apps/list/">Lista de Juegos</a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+                <a class="btn btn-brand" href="/apps/acerca_de_mi/">Acerca de Mi</a>
+                {% if user.is_authenticated %}
+                <h5> Bienvenido: {{user.get_username}}</h5>
+                <a class="btn btn-primary" href="/account/logout/">Salir</a>
+                {% else %}
+                <a class="btn btn-primary" href="/account/login/">Ingresar</a>
+                <a class="btn btn-primary" href="/account/register/">Registrarse</a>
+                {% endif %}
+
+
             </div>
         </nav>

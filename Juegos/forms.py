@@ -7,6 +7,9 @@ class BlogForm(forms.Form):
     plataforma = forms.CharField()
     descripcion = forms.CharField()
     autor = forms.CharField()
-    # imagen = forms.ImageField()
+    imagen = forms.ImageField()
+
+class BusquedadForm(forms.Form):
+    nombre = forms.CharField()
 
 

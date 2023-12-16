@@ -31,7 +31,7 @@ class JuegoEditar(LoginRequiredMixin, UpdateView):
     model = Juegos
     success_url = "/apps/list/"
     template_name = ("Blogs/formulario_crear.html")
-    fields = ["nombre","subnombre","cuerpo"]
+    fields = ["nombre","plataforma","descripcion"]
 
 
 class JuegoBorrar(LoginRequiredMixin, DeleteView):

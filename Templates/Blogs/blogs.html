@@ -8,17 +8,16 @@
 
     </form>
 </div>
-
-
-
+<p>
 {% for Juegos in object_list %}
 {% if Juegos %}
 <h3> VIDEOJUEGO </h3>
 <h5>{{Juegos.nombre}}</h5>
-<p> Plataforma: {{Juegos.subnombre}}</p>
+<p> Plataforma: {{Juegos.plataforma}}</p>
 {% else %}
 <p> No hay blogs </p>
 {% endif %}
+</p>
 
 
   <p class="lead mb-0">

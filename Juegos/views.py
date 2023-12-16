@@ -3,8 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
-from Juegos.forms import BlogForm, BusquedadForm
-from Juegos.models import Juegos
+from Juegos.forms import BlogForm, BusquedadForm, ComentarioForm
+from Juegos.models import Juegos, Comentarios
 
 
 def show_html(request):
@@ -14,27 +14,15 @@ def show_html(request):
     }
     return render(request, template_name= "Templates/base.html", context= contexto)
 
-
-
 class JuegoList(ListView):
-        model = Juegos
-        template_name = "Blogs/blogs.html"
+    model = Juegos
+    template_name = "Blogs/blogs.html"
 
-@login_required
-def crear_juego_form(request):
-    if request.method == "POST":
-        blog_formulario = BlogForm(request.POST)
-        if blog_formulario.is_valid():
-            informacion = blog_formulario.cleaned_data
-            juego_agregar = Juegos(nombre=informacion["nombre"], subnombre=informacion["plataforma"], cuerpo=informacion["descripcion"], autor=informacion["autor"], )
-            juego_agregar.save()
-            return redirect("/apps/list/")
-
-    form = BlogForm()
-    contexto = {
-        "form": form
-    }
-    return render(request, template_name="Blogs/formulario_crear.html", context=contexto)
+class CrearJuego(LoginRequiredMixin, CreateView):
+    model = Juegos
+    template_name = "Blogs/formulario_crear.html"
+    success_url = "/apps/list/"
+    fields = "__all__"
 class JuegoDetalle(DetailView):
     model = Juegos
     template_name = "Blogs/juego_detalle.html"
@@ -71,6 +59,18 @@ def busqueda_juego(request):
        "form": BusquedaForm()
    }
    return render(request, template_name="Blogs/blogs.html", context=contexto)
+
+
+def comentarios(request):
+
+    formulario = ComentarioForm(request.POST)
+    if formulario.is_valid():
+      informacion =  formulario.cleaned_data
+      juego = Juegos.objects.get(id= informacion["juego"])
+      comentario_crear = Comentarios(usuario=request.user, juego=juego, comentario=informacion["comentario"])
+      comentario_crear.save()
+      redirect("/apps/list/")
+
 
 
 

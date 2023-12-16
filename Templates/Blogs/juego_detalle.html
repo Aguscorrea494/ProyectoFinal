@@ -2,13 +2,22 @@
 {% block cambio%}
 
 <h3> {{object.nombre}} </h3>
-<p> PLATAFORMA : {{object.subnombre}} </p>
-<p> DESCRIPCION : {{object.cuerpo}}  </p>
+<p> PLATAFORMA : {{object.plataforma}} </p>
+<p> DESCRIPCION : {{object.descripcion}}  </p>
 <p> AUTOR : {{object.autor}}  </p>
 <p> FECHA : {{object.fecha}}  </p>
-<img style="height: 60px" src="{{ user.avatar.imagen.url }}" alt="">-->
+<img src="{{ object.imagen.url }}"alt="">
 <p>
      <a href="{% url 'JuegoLista' %}">Volver a la lista</a>
 </p>
 
+
+{% if user.is_aunthenticated %}
+
+<form action="" method="POST">
+    <input type="text" name="comentario">
+    <input type="hidden" name="juego" value= "{{ juego.id }}">
+    <input type="submit" name="Enviar">
+      </form>
+    {% endif %}
     {% endblock %}
